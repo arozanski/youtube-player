@@ -1,0 +1,10 @@
+version 0.1
+
+phases:
+  build:
+    commmands:
+      - echo Nothing to do yet
+  artifacts:
+    files:
+      - index.html
+      - dist/*    
