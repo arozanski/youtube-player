@@ -10,7 +10,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 
-		YTSearch({ key: API_KEY, term: 'wallflowers'}, (videos) => {
+		YTSearch({ key: API_KEY, term: 'wallflowers' }, (videos) => {
 			this.setState({ videos });
 		});
 
@@ -18,11 +18,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		return(
-			<div>
-				<SearchBar />
-			</div>
-		);
+		return(<div><SearchBar /></div>);
 	}
 }
 
