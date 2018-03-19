@@ -2,6 +2,7 @@ import boto3
 from io import BytesIO
 import io
 import zipfile
+import mimetypes
 
 s3 = boto3.resource('s3')
 
@@ -14,5 +15,6 @@ build_bucket.download_fileobj('youtubeplayer.zip', youtube_zip)
 with zipfile.ZipFile(youtube_zip) as myzip:
     for nm in myzip.namelist():
         obj = myzip.open(nm)
-        youtube_bucket.upload_fileobj(obj, nm)
+        youtube_bucket.upload_fileobj(obj, nm,
+            ExtraArgs={'ContentType': mimetypes.guess_type(nm)[0]})
         youtube_bucket.Object(nm).Acl().put(ACL='public-read')
