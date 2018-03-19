@@ -9,6 +9,11 @@ def lambda_handler(event, context):
     s3 = boto3.resource('s3')
     sns = boto3.resource('sns')
     topic = sns.Topic('arn:aws:sns:eu-west-2:223963872767:DeployYoutubeTopic')
+    pipeline = boto3.client('codepipeline')
+    job = event['CodePipeline.job']
+    response = pipeline.put_job_success_result(
+        jobId=job['id']
+    )
 
     try:
         youtube_bucket = s3.Bucket('youtube.rozanski.xyz')
@@ -25,8 +30,9 @@ def lambda_handler(event, context):
                 youtube_bucket.Object(nm).Acl().put(ACL='public-read')
         print('All done')
         topic.publish(Subject='Youtube Player deployment complete', Message='Youtube Player deployment complete')
+
     except:
         topic.publish(Subject='Youtube Player deployment failed', Message='Youtube Player deployment failed')
         raise
 
-    return 'Lambda'
+    return response
