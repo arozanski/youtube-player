@@ -1,4 +1,4 @@
-version: 0.1
+version: 0.2
 
 phases:
   build:
@@ -8,4 +8,4 @@ phases:
 artifacts:
   files:
     - index.html
-    - dist/*
+    - dist/bundle.js
