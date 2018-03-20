@@ -7,3 +7,7 @@
 	$ npm run dev
 
 	$ npm run build
+
+## Testing
+
+	$ npm run test
