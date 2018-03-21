@@ -18,10 +18,9 @@ def lambda_handler(event, context):
     try:
         youtube_bucket = s3.Bucket('youtube.rozanski.xyz')
         build_bucket = s3.Bucket('youtube-build.rozanski.xyz')
-
         youtube_zip = io.BytesIO()
-        build_bucket.download_fileobj('youtubeplayer.zip', youtube_zip)
 
+        build_bucket.download_fileobj('youtubeplayer.zip', youtube_zip)
         with zipfile.ZipFile(youtube_zip) as myzip:
             for nm in myzip.namelist():
                 obj = myzip.open(nm)
