@@ -10,5 +10,6 @@ phases:
       - npm run build
 artifacts:
   files:
-    - index.html
-    - dist/bundle.js
+    - '**/*'
+  base-directory: 'dist'
+  discard-paths: yes

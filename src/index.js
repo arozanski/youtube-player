@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import SearchBar from './components/search_bar';
 
@@ -18,8 +19,10 @@ class App extends React.Component {
 	}
 
 	render() {
-		return(<div><SearchBar /></div>);
+		return (
+			<div>x</div>
+		);
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('container'));
+ReactDOM.render(<App />, document.querySelector('.container'));
