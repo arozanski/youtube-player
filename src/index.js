@@ -1,27 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/style.css';
 
+import VideoList from './components/video_list';
 import SearchBar from './components/search_bar';
+import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyDcEZF7MmMfcJRDf51Je-H3r5LpaaNlpsA';
-const PLAYLIST_ID = 'PL9q9XUGDQo9blo8Ifz2x3PRxd_wDCOvja';
 
-class App extends React.Component {
+class App extends Component {
 	constructor(props) {
 		super(props);
 
-		YTSearch({ key: API_KEY, term: 'wallflowers' }, (videos) => {
-			this.setState({ videos });
-		});
+		this.state = {
+			videos: [],
+			selectedVideo: null
+		};
 
-		this.state = { videos: [] };
+		YTSearch({ key: API_KEY, term: 'wallflowers' }, videos => {
+			this.setState({
+				videos: videos,
+				selectedVideo: videos[0]
+			});
+		});
 	}
 
 	render() {
 		return (
-			<div>y</div>
+			<div>
+				<SearchBar />
+				<VideoDetail video={ this.state.selectedVideo } />
+				<VideoList
+					videos={ this.state.videos }
+					onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
+				/>
+			</div>
 		);
 	}
 }
